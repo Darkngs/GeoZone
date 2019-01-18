@@ -26,9 +26,8 @@ class MainViewController: UIViewController {
    }
    
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      if segue.identifier == "addGeoItem" {
-         let navigationController = segue.destination as! UINavigationController
-         let viewController = navigationController.viewControllers.first as! AddGeoItemViewController
+      if segue.identifier == Constants.Segues.addGeoItem {
+         let viewController = segue.destination as! AddGeoItemViewController
          viewController.delegate = self
       }
    }

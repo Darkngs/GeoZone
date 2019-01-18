@@ -17,4 +17,8 @@ struct Constants {
    struct Keys {
       static let savedGeoItems: String = "savedGeoItemsKey"
    }
+   
+   struct Segues {
+      static let addGeoItem: String = "AddGeoItemSegue"
+   }
 }

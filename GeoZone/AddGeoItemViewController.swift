@@ -40,7 +40,7 @@ class AddGeoItemViewController: UITableViewController {
    }
    
    @IBAction func onCancel(sender: AnyObject) {
-      dismiss(animated: true, completion: nil)
+      navigationController?.popViewController(animated: true)
    }
    
    @IBAction private func onAdd(sender: AnyObject) {

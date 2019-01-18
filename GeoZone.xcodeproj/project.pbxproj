@@ -93,8 +93,8 @@
 		1AEE129821F0F5C80080E883 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1AEE129F21F1E3CD0080E883 /* AddGeoItemViewController.swift */,
 				1AEE127721F0F23F0080E883 /* MainViewController.swift */,
+				1AEE129F21F1E3CD0080E883 /* AddGeoItemViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
