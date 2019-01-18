@@ -12,6 +12,9 @@
 		1AEE127B21F0F23F0080E883 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AEE127921F0F23F0080E883 /* Main.storyboard */; };
 		1AEE127D21F0F2400080E883 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AEE127C21F0F2400080E883 /* Assets.xcassets */; };
 		1AEE128021F0F2400080E883 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AEE127E21F0F2400080E883 /* LaunchScreen.storyboard */; };
+		1AEE129521F0F5B70080E883 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEE129321F0F5B70080E883 /* Utils.swift */; };
+		1AEE129621F0F5B70080E883 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEE129421F0F5B70080E883 /* Constants.swift */; };
+		1AEE129C21F1DF6D0080E883 /* GeoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEE129B21F1DF6D0080E883 /* GeoItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		1AEE127C21F0F2400080E883 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1AEE127F21F0F2400080E883 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AEE128121F0F2400080E883 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AEE129321F0F5B70080E883 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		1AEE129421F0F5B70080E883 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1AEE129B21F1DF6D0080E883 /* GeoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +60,49 @@
 		1AEE127421F0F23F0080E883 /* GeoZone */ = {
 			isa = PBXGroup;
 			children = (
-				1AEE127521F0F23F0080E883 /* AppDelegate.swift */,
-				1AEE127721F0F23F0080E883 /* ViewController.swift */,
-				1AEE127921F0F23F0080E883 /* Main.storyboard */,
-				1AEE127C21F0F2400080E883 /* Assets.xcassets */,
-				1AEE127E21F0F2400080E883 /* LaunchScreen.storyboard */,
-				1AEE128121F0F2400080E883 /* Info.plist */,
+				1AEE129221F0F59B0080E883 /* General */,
+				1AEE129821F0F5C80080E883 /* ViewControllers */,
+				1AEE129021F0F58B0080E883 /* Views */,
+				1AEE129921F0F5F10080E883 /* Other */,
 			);
 			path = GeoZone;
+			sourceTree = "<group>";
+		};
+		1AEE129021F0F58B0080E883 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1AEE127E21F0F2400080E883 /* LaunchScreen.storyboard */,
+				1AEE127921F0F23F0080E883 /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		1AEE129221F0F59B0080E883 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				1AEE127521F0F23F0080E883 /* AppDelegate.swift */,
+				1AEE129421F0F5B70080E883 /* Constants.swift */,
+				1AEE129321F0F5B70080E883 /* Utils.swift */,
+				1AEE129B21F1DF6D0080E883 /* GeoItem.swift */,
+			);
+			name = General;
+			sourceTree = "<group>";
+		};
+		1AEE129821F0F5C80080E883 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1AEE127721F0F23F0080E883 /* ViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1AEE129921F0F5F10080E883 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				1AEE127C21F0F2400080E883 /* Assets.xcassets */,
+				1AEE128121F0F2400080E883 /* Info.plist */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +178,9 @@
 			files = (
 				1AEE127821F0F23F0080E883 /* ViewController.swift in Sources */,
 				1AEE127621F0F23F0080E883 /* AppDelegate.swift in Sources */,
+				1AEE129521F0F5B70080E883 /* Utils.swift in Sources */,
+				1AEE129C21F1DF6D0080E883 /* GeoItem.swift in Sources */,
+				1AEE129621F0F5B70080E883 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

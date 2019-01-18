@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       locationManager.delegate = self
       locationManager.requestAlwaysAuthorization()
+      
+      let options: UNAuthorizationOptions = [.badge, .sound, .alert]
+      UNUserNotificationCenter.current()
+         .requestAuthorization(options: options) { success, error in
+            if let error = error {
+               print("Error: \(error)")
+            }
+      }
       
       return true
    }
@@ -38,7 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    }
    
    func applicationDidBecomeActive(_ application: UIApplication) {
-      
+      application.applicationIconBadgeNumber = 0
+      UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+      UNUserNotificationCenter.current().removeAllDeliveredNotifications()
    }
    
    func applicationWillTerminate(_ application: UIApplication) {
@@ -47,20 +58,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    
    //MARK: -
    
+   func handleEvent(for region: CLRegion!) {
+      if UIApplication.shared.applicationState == .active {
+         guard let message = note(from: region.identifier) else {
+            return
+         }
+         
+         window?.rootViewController?.showAlert(withTitle: nil, message: message)
+      } else {
+         guard let body = note(from: region.identifier) else {
+            return
+         }
+         
+         let notificationContent = UNMutableNotificationContent()
+         notificationContent.body = body
+         notificationContent.sound = UNNotificationSound.default
+         notificationContent.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
+         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+         let request = UNNotificationRequest(identifier: "location_change", content: notificationContent, trigger: trigger)
+         UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+               print("Error: \(error)")
+            }
+         }
+      }
+   }
    
+   func note(from identifier: String) -> String? {
+      let geoItems = GeoItem.allGeoItems()
+      guard let matched = geoItems.filter({
+         $0.identifier == identifier
+      }).first else { return nil }
+      return matched.note
+   }
 }
 
 extension AppDelegate: CLLocationManagerDelegate {
    
    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
       if region is CLCircularRegion {
-         
+         handleEvent(for: region)
       }
    }
    
    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
       if region is CLCircularRegion {
-         
+         handleEvent(for: region)
       }
    }
 }
