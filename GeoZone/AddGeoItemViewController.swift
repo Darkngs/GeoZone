@@ -35,24 +35,25 @@ class AddGeoItemViewController: UITableViewController {
    
    // MARK: -
    
-   @IBAction func textFieldEditingChanged(sender: UITextField) {
-      addButton.isEnabled = !radiusTextField.text!.isEmpty && !noteTextField.text!.isEmpty
-   }
-   
-   @IBAction func onCancel(sender: AnyObject) {
+   @IBAction fileprivate func actionCancel(_ sender: Any? = nil) {
       navigationController?.popViewController(animated: true)
    }
    
-   @IBAction private func onAdd(sender: AnyObject) {
+   @IBAction fileprivate func actionAdd(_ sender: Any?) {
       let coordinate = mapView.centerCoordinate
       let radius = Double(radiusTextField.text!) ?? 0
       let identifier = NSUUID().uuidString
       let note = noteTextField.text
       let eventType: GeoItem.EventType = (eventTypeSegmentedControl.selectedSegmentIndex == 0) ? .onEntry : .onExit
+      actionCancel()
       delegate?.addGeoItemViewController(self, didAddCoordinate: coordinate, radius: radius, identifier: identifier, note: note!, eventType: eventType)
    }
    
-   @IBAction private func onZoomToCurrentLocation(sender: AnyObject) {
+   @IBAction fileprivate func actionZoomToCurrentLocation(_ sender: Any?) {
       mapView.zoomToUserLocation()
+   }
+   
+   @IBAction fileprivate func textFieldEditingChanged(sender: UITextField) {
+      addButton.isEnabled = !radiusTextField.text!.isEmpty && !noteTextField.text!.isEmpty
    }
 }

@@ -140,7 +140,6 @@ class MainViewController: UIViewController {
 extension MainViewController: AddGeoItemViewControllerDelegate {
    
    func addGeoItemViewController(_ controller: AddGeoItemViewController, didAddCoordinate coordinate: CLLocationCoordinate2D, radius: Double, identifier: String, note: String, eventType: GeoItem.EventType) {
-      controller.dismiss(animated: true, completion: nil)
       let clampedRadius = min(radius, locationManager.maximumRegionMonitoringDistance)
       let geoItem = GeoItem(coordinate: coordinate, radius: clampedRadius, identifier: identifier, note: note, eventType: eventType)
       add(geoItem)

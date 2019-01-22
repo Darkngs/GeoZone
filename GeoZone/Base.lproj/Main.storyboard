@@ -227,18 +227,18 @@
                     <navigationItem key="navigationItem" title="Add GeoItem" id="cjD-eh-hQf">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="xDC-Ux-qv5">
                             <connections>
-                                <action selector="onCancelWithSender:" destination="WOc-Kh-RdY" id="fR4-Ya-HVp"/>
+                                <action selector="actionCancel:" destination="WOc-Kh-RdY" id="zRh-ma-viP"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Add" id="Zqz-jV-nhQ">
                                 <connections>
-                                    <action selector="onAddWithSender:" destination="WOc-Kh-RdY" id="o75-ar-PF3"/>
+                                    <action selector="actionAdd:" destination="WOc-Kh-RdY" id="LD0-l0-L8j"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Item" image="current" id="cLD-qt-jBr" userLabel="CurrentLocation">
                                 <connections>
-                                    <action selector="onZoomToCurrentLocationWithSender:" destination="WOc-Kh-RdY" id="vJ9-LT-9X0"/>
+                                    <action selector="actionZoomToCurrentLocation:" destination="WOc-Kh-RdY" id="gDg-Ps-n1l"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
