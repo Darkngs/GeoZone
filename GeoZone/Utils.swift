@@ -4,6 +4,7 @@
 
 import UIKit
 import MapKit
+import SystemConfiguration.CaptiveNetwork
 
 extension UIViewController {
    
@@ -50,5 +51,22 @@ extension Array where Element: Equatable {
       for object in array {
          self.removeObject(object)
       }
+   }
+}
+
+func currentSSIDs() -> [String] {
+   guard let supportedInterfaces = CNCopySupportedInterfaces() as? [String] else {
+      return []
+   }
+   
+   return supportedInterfaces.compactMap { name in
+      guard let info = CNCopyCurrentNetworkInfo(name as CFString) as? [String: Any] else {
+         return nil
+      }
+      guard let ssid = info[kCNNetworkInfoKeySSID as String] as? String else {
+         return nil
+      }
+      
+      return ssid
    }
 }

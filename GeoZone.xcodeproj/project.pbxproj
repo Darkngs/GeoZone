@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A54D01A21F756AD006BD234 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A54D01921F756AD006BD234 /* ExternalAccessory.framework */; };
 		1AEE127621F0F23F0080E883 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEE127521F0F23F0080E883 /* AppDelegate.swift */; };
 		1AEE127821F0F23F0080E883 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEE127721F0F23F0080E883 /* MainViewController.swift */; };
 		1AEE127B21F0F23F0080E883 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AEE127921F0F23F0080E883 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A54D01921F756AD006BD234 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		1AEE127221F0F23F0080E883 /* GeoZone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoZone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AEE127521F0F23F0080E883 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AEE127721F0F23F0080E883 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -37,17 +39,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A54D01A21F756AD006BD234 /* ExternalAccessory.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A54D01821F756AD006BD234 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A54D01921F756AD006BD234 /* ExternalAccessory.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1AEE126921F0F23F0080E883 = {
 			isa = PBXGroup;
 			children = (
 				1AEE127421F0F23F0080E883 /* GeoZone */,
 				1AEE127321F0F23F0080E883 /* Products */,
+				1A54D01821F756AD006BD234 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

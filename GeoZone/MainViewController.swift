@@ -58,7 +58,10 @@ class MainViewController: UIViewController {
    }
    
    func remove(_ geoItem: GeoItem) {
-      guard let index = geoItems.index(of: geoItem) else { return }
+      guard let index = geoItems.index(of: geoItem) else {
+         return
+      }
+      
       geoItems.remove(at: index)
       mapView.removeAnnotation(geoItem)
       removeRadiusOverlay(forGeoItem: geoItem)
