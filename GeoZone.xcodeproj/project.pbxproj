@@ -21,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		1A54D01921F756AD006BD234 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		1A54D01B21F7577E006BD234 /* GetSSID.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GetSSID.entitlements; sourceTree = "<group>"; };
 		1AEE127221F0F23F0080E883 /* GeoZone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoZone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AEE127521F0F23F0080E883 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AEE127721F0F23F0080E883 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				1AEE127C21F0F2400080E883 /* Assets.xcassets */,
+				1A54D01B21F7577E006BD234 /* GetSSID.entitlements */,
 				1AEE128121F0F2400080E883 /* Info.plist */,
 			);
 			name = Other;
