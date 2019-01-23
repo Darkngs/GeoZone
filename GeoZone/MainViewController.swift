@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
    @IBOutlet weak var mapView: MKMapView!
    
    var geoItems: [GeoItem] = []
+   var selectedGeoItem: GeoItem?
    var locationManager = CLLocationManager()
    
    override func viewDidLoad() {
@@ -25,10 +26,17 @@ class MainViewController: UIViewController {
       loadAllGeoItems()
    }
    
+   override func viewWillDisappear(_ animated: Bool) {
+      super.viewWillDisappear(animated)
+      
+      self.selectedGeoItem = nil
+   }
+   
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       if segue.identifier == Constants.Segues.addGeoItem {
          let viewController = segue.destination as! AddGeoItemViewController
          viewController.delegate = self
+         viewController.geoItem = selectedGeoItem
       }
    }
    
@@ -139,11 +147,16 @@ class MainViewController: UIViewController {
 
 extension MainViewController: AddGeoItemViewControllerDelegate {
    
-   func addGeoItemViewController(_ controller: AddGeoItemViewController, didAddCoordinate coordinate: CLLocationCoordinate2D, radius: Double, identifier: String, note: String, eventType: GeoItem.EventType) {
+   func addGeoItem(withCoordinate coordinate: CLLocationCoordinate2D, radius: Double, identifier: String, note: String, eventType: GeoItem.EventType) {
       let clampedRadius = min(radius, locationManager.maximumRegionMonitoringDistance)
       let geoItem = GeoItem(coordinate: coordinate, radius: clampedRadius, identifier: identifier, note: note, eventType: eventType)
       add(geoItem)
       startMonitoring(geoItem: geoItem)
+      saveAllGeoItems()
+   }
+   
+   func remove(geoItem: GeoItem) {
+      remove(geoItem)
       saveAllGeoItems()
    }
 }
@@ -170,22 +183,23 @@ extension MainViewController: CLLocationManagerDelegate {
 extension MainViewController: MKMapViewDelegate {
    
    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-      let identifier = Constants.Identifiers.geoItem
-      if annotation is GeoItem {
-         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
-         if annotationView == nil {
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView?.canShowCallout = true
-            let removeButton = UIButton(type: .custom)
-            removeButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
-            removeButton.setImage(UIImage(named: "delete")!, for: .normal)
-            annotationView?.leftCalloutAccessoryView = removeButton
-         } else {
-            annotationView?.annotation = annotation
-         }
-         return annotationView
+      guard annotation is GeoItem else {
+         return nil
       }
-      return nil
+      
+      let identifier = Constants.Identifiers.geoItem
+      var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
+      if annotationView == nil {
+         annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+         annotationView?.canShowCallout = true
+         let optionsButton = UIButton(type: .custom)
+         optionsButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
+         optionsButton.setImage(UIImage(named: "delete")!, for: .normal)
+         annotationView?.leftCalloutAccessoryView = optionsButton
+      } else {
+         annotationView?.annotation = annotation
+      }
+      return annotationView
    }
    
    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -200,8 +214,26 @@ extension MainViewController: MKMapViewDelegate {
    }
    
    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-      let GeoItem = view.annotation as! GeoItem
-      remove(GeoItem)
-      saveAllGeoItems()
+      guard let geoItem = view.annotation as? GeoItem else {
+         return
+      }
+      
+      let optionMenu = UIAlertController(title: nil, message: "Choose option", preferredStyle: .actionSheet)
+      
+      let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { action in
+         self.remove(geoItem)
+         self.saveAllGeoItems()
+      }
+      
+      let editAction = UIAlertAction(title: "Edit", style: .default) { action in
+         self.selectedGeoItem = geoItem
+         self.performSegue(withIdentifier: Constants.Segues.addGeoItem, sender: self)
+      }
+      
+      let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+      optionMenu.addAction(deleteAction)
+      optionMenu.addAction(editAction)
+      optionMenu.addAction(cancelAction)
+      self.present(optionMenu, animated: true, completion: nil)
    }
 }
