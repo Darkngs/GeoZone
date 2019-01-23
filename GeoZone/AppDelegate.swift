@@ -22,11 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       locationManager.requestAlwaysAuthorization()
       
       let options: UNAuthorizationOptions = [.badge, .sound, .alert]
-      UNUserNotificationCenter.current()
-         .requestAuthorization(options: options) { success, error in
-            if let error = error {
-               print("Error: \(error)")
-            }
+      UNUserNotificationCenter.current().requestAuthorization(options: options) { success, error in
+         if let error = error {
+            print("Error: \(error)")
+         }
       }
       
       return true
@@ -84,12 +83,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
    }
    
-   func note(from identifier: String) -> String? {
-      let geoItems = GeoItem.allGeoItems()
-      guard let matched = geoItems.filter({
+   func geoItem(from identifier: String) -> GeoItem? {
+      return GeoItem.allGeoItems().filter({
          $0.identifier == identifier
-      }).first else { return nil }
-      return matched.note
+      }).first
+   }
+   
+   func note(from identifier: String) -> String? {
+      return geoItem(from: identifier)?.note
    }
 }
 
@@ -102,7 +103,13 @@ extension AppDelegate: CLLocationManagerDelegate {
    }
    
    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-      if region is CLCircularRegion {
+      let identifier = "Test SSID name"
+      let currentSSID = currentSSIDs().filter({
+         $0 == identifier
+      }).first
+      if let currentSSID = currentSSID {
+         window?.rootViewController?.showAlert(withTitle: nil, message: "You are stil connected to \(currentSSID)!")
+      } else if region is CLCircularRegion {
          handleEvent(for: region)
       }
    }
